@@ -1,0 +1,41 @@
+<?php
+
+$n = urlencode('대한민국');
+
+$ch = curl_init();
+$url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp';
+
+$queryParams = [
+  'nation' => '대한민국',
+  'collection' => 'kmdb_new2',
+  'ServiceKey' => '8F4M39101CV6EW1ZCU9M',
+  'val001' => '2018',
+  'val001' => '01',
+];
+
+
+$url .= '?' . http_build_query($queryParams);
+
+
+curl_setopt($ch, CURLOPT_URL, $url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch, CURLOPT_HEADER, FALSE);
+curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'GET');
+
+
+$response = curl_exec($ch);
+
+
+if ($response === FALSE) {
+   echo 'cURL Error: ' . curl_error($ch);
+}
+
+
+curl_close($ch);
+
+
+// var_dump($response);
+echo $response;
+
+
+?>
